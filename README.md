@@ -1,3 +1,1 @@
-# wordle_clone
-
-A simple vanilla js clone of Wordle
+Wordle clone - NwHacks 2023 Hackathon

@@ -1,12 +1,25 @@
 import { WORDS } from "./words.js";
 
+const toggleButton = document.getElementById("dark-mode-toggle");
+const toggleIcon = document.getElementById("toggle-icon");
+
+toggleButton.addEventListener("click", function () {
+  document.body.classList.toggle("dark-mode");
+
+  if (toggleIcon.classList.contains("fa-toggle-off")) {
+    toggleIcon.classList.remove("fa-toggle-off");
+    toggleIcon.classList.add("fa-toggle-on");
+  } else {
+    toggleIcon.classList.remove("fa-toggle-on");
+    toggleIcon.classList.add("fa-toggle-off");
+  }
+});
+
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
 let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)];
-
-console.log(rightGuessString);
 
 function initBoard() {
   let board = document.getElementById("game-board");
@@ -29,11 +42,11 @@ function shadeKeyBoard(letter, color) {
   for (const elem of document.getElementsByClassName("keyboard-button")) {
     if (elem.textContent === letter) {
       let old = elem.style.backgroundColor;
-      if (old === "green") {
+      if (old === "palegreen") {
         return;
       }
 
-      if (old === "yellow" && color !== "green") {
+      if (old === "#fced5d" && color !== "palegreen") {
         return;
       }
 
@@ -73,23 +86,23 @@ function checkGuess() {
 
   var letterColor = ["gray", "gray", "gray", "gray", "gray"];
 
-  //check green
+  //check palegreen
   for (let i = 0; i < 5; i++) {
     if (rightGuess[i] == currentGuess[i]) {
-      letterColor[i] = "green";
+      letterColor[i] = "palegreen";
       rightGuess[i] = "#";
     }
   }
 
-  //check yellow
+  //check #fced5d
   //checking guess letters
   for (let i = 0; i < 5; i++) {
-    if (letterColor[i] == "green") continue;
+    if (letterColor[i] == "palegreen") continue;
 
     //checking right letters
     for (let j = 0; j < 5; j++) {
       if (rightGuess[j] == currentGuess[i]) {
-        letterColor[i] = "yellow";
+        letterColor[i] = "#fced5d";
         rightGuess[j] = "#";
       }
     }
